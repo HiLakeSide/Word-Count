@@ -1,0 +1,195 @@
+//Prompt operator to enter a sentence, count how many characters, letters,
+// vowels, words are in that sentence. Capitalize the sentence and print it
+// in reverse.
+//written by: Lakin West     Date: 04/11/23
+#include <iostream>
+#include <cctype>
+#include <cstring>
+using namespace std;
+
+
+//suggested prototypes
+int stringLen(char[], int);
+void convertUpper(char[], int);
+int countLetters(char[], int);
+void countVowels(char[], int, int&, int&, int&, int&, int&);
+int countWords(char[], int);
+void reverseString(char[], char[], int);
+
+int main()
+{
+
+    //declare the variables you need
+    const int SIZE = 80;
+    int length, letters, words, acnt, ecnt, icnt, ocnt, ucnt;
+    char line[SIZE];
+    char reversedLine[SIZE];
+
+    //Input
+    //get the string from the user
+    cout << "Please enter a sentence." << endl;
+    cin.getline(line, SIZE);
+    
+
+    //find the length of the string
+    length = stringLen(line, SIZE);
+    
+
+    //convert string to upper case characters
+    convertUpper(line, length);
+
+    //count the number of letters
+    letters = countLetters(line, length);
+
+    //count the number of vowels in the string
+    countVowels(line, length, acnt, ecnt, icnt, ocnt, ucnt);
+   
+
+    //count words
+    words = countWords(line, length);
+    
+    //reverse the string
+    reverseString(line, reversedLine, length);
+    
+
+
+    //Ouput
+    // Displays results
+    cout << "There are " << length << " characters in the sentence." << endl;
+    cout << "The number of letters in the sentence: " << letters << endl;
+    cout << "The number of vowels in the sentence: " << endl;
+    cout << "A: " << acnt << endl;
+    cout << "E: " << ecnt << endl;
+    cout << "I: " << icnt << endl;
+    cout << "O: " << ocnt << endl;
+    cout << "U: " << ucnt << endl;
+    cout << "The number of words in the sentence: " << words << endl;
+    cout << reversedLine << endl;
+    
+    
+    
+
+
+}
+
+//Counts the legnth of the sentence
+int stringLen(char sentence[], int SIZE)
+{
+    //Counter variable
+    int count = 0;
+
+    //A loop that counts each charchter.
+    for (int i = 0; i < SIZE; i++)
+    {
+        if (isprint(sentence[i]))
+            count++;
+        if (sentence[i] == '\0')
+            break;
+    }
+
+    return count;
+}
+
+//Converts each lowercase letter to uppercase.
+void convertUpper(char sentence[], int sLength)
+{
+    //counter variable
+    int i = 0;
+
+    // Loop to change each lowercase letter to uppercase
+    while (sentence[i] != '\0')
+    {
+        if (sentence[i] >= 97 && sentence[i] <= 122)
+            sentence[i] -= 32;
+        i++;
+    }
+
+
+
+}
+
+//Counts the letters in the sentence
+int countLetters(char sentence[], int sLength)
+{
+    //counter variable
+    int count = 0;
+   
+    // A loop that will count each letter
+    for (int i = 0; i < sLength; i++)
+    {
+        if (isalpha(sentence[i]))
+            count++;
+
+        if (sentence[i] == '\0')
+            break;
+    }
+
+    return count;
+}
+
+//Counts the vowels in a sentence
+void countVowels(char sentence[], int sLength, int& acnt, int& ecnt, int& icnt, int& ocnt, int& ucnt)
+{
+    //Variables
+    acnt = 0;
+    ecnt = 0;
+    icnt = 0;
+    ocnt = 0;
+    ucnt = 0;
+
+    // This loop will start counting each vowel in the sentence
+    for (int i = 0; i < sLength; i++)
+    {
+        if (sentence[i] == 'a' || sentence[i] == 'A')
+            acnt++;
+        if (sentence[i] == 'e' || sentence[i] == 'E')
+            ecnt++;
+        if (sentence[i] == 'i' || sentence[i] == 'I')
+            icnt++;
+        if (sentence[i] == 'o' || sentence[i] == 'O')
+            ocnt++;
+        if (sentence[i] == 'u' || sentence[i] == 'U')
+            ucnt++;
+        if (sentence[i] == '\0')
+            break;
+    }
+
+
+}
+
+//Counts how many words are in a sentence
+int countWords(char sentence[], int sLength)
+{
+    int count = 0;
+    //write loop that processes sentence and counts each word
+    for (int i = 0; i < sLength; i++)
+    {
+        if (isspace(sentence[i]))
+            count++;
+
+        if (sentence[i] == '\0')
+            break;
+    }
+
+    return count;
+}
+
+//This function takes the first string and reverse the order for the new string.
+void reverseString(char sen[], char sen2[], int sLength)
+{
+    //Variables
+    int a = 0;
+
+    cout << "slength " << sLength << endl;
+    // This loop copys each character, starting with the last character first. 
+    for (int i = (sLength - 1); i >= 0; i--)
+    {
+        sen2[a] = sen[i];
+        a++;
+
+    }
+
+    sen2[sLength] = '\0';
+
+
+}
